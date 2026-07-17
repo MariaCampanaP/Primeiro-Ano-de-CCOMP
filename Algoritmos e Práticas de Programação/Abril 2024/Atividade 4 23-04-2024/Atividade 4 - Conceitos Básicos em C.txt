@@ -1,0 +1,118 @@
+Atividade 4 - Conceitos Básicos em C
+
+1 - Faça um programa que mostre a mensagem Ola Mundo!, na tela (exercício obrigatório quando está aprendendo uma nova linguagem).
+
+#include <stdio.h>
+int main (){
+    printf("Ola mundo!");
+    return 0;
+}
+
+2 - Faça um programa que receba do usuário quatro números inteiros, calcule e mostre a soma desses números.
+
+#include <stdio.h>
+int main(){
+    int N1, N2, N3, N4;
+    int soma;
+    printf("Digite o primeiro numero inteiro:");
+    scanf("%d", &N1);
+    printf("Digite o segundo numero inteiro:");
+    scanf("%d", &N2);
+    printf("Digite o terceiro numero inteiro:");
+    scanf("%d", &N3);
+    printf("Digite o quarto numero inteiro:");
+    scanf("%d", &N4);
+    soma = N1 + N2 + N3 + N4;
+    printf("Mostre a soma dos quatro numeros inteiros: %d\n", soma);
+    return 0;
+}
+
+3 - Faça um programaque calcule e mostre a área de um triângulo. Sabe-se que: Área = (base*altura)/2.
+
+#include <stdio.h>
+int main(){
+float base, altura, area;
+printf("Digite a base do triangulo:");
+scanf("%f", &base);
+printf("Digite a altura do triangulo:");
+scanf("%f", &altura);
+area = (base*altura)/2;
+printf("A base do triangulo e: %.2f\n", area);
+return 0;
+}
+
+4 - Faça um programa que receba o salário de um funcionário e o percentual de aumento, calcule e mostre o valor do aumento e o novo salário.
+
+#include <stdio.h>
+int main (){
+float salario, percentual_aumento, aumento, novo_salario;
+printf("Digite o salario do funcionario: ");
+scanf("%f", &salario);
+printf("Digite o percentual de aumento do funcionario: ");
+scanf("%f", &percentual_aumento);
+aumento = salario*(percentual_aumento/100);
+novo_salario = salario + aumento;
+printf("O valor do novo salario e: %.2f\n", aumento);
+return 0;
+}
+
+5 - Faça um programa que receba o ano de nascimento de uma pessoa e o ano atual, calcule e mostre:
+b) a idade dessa pessoa;
+a) quantos anos ela terá em 2050.
+
+#include <stdio.h>
+int main(){
+    int ano_nasc, ano_atual, idade, idade_2050;
+    printf("Digite o seu ano de nascenca:");
+    scanf("%d", &ano_nasc);
+    printf("Digite o ano atual:");
+    scanf("%d", &ano_atual);
+    idade = ano_atual - ano_nasc;
+    printf("A sua idade e: %d\n", idade);
+    idade_2050 = 2050 - ano_nasc;
+    printf("A sua idade em 2050 sera de: %d anos.\n", idade_2050);
+    return 0;
+}
+
+6 - Faça um algoritmo que receba a temperatura em graus Celsius e apresente-a em graus Fahrenheit, de acordo com a fórmula F = (1.8*C)+32.
+
+#include <stdio.h>
+int main (){
+    float temperatura_c, temperatura_f;
+    printf("Digite a temperatura local em Graus Celsius:");
+    scanf("%f", &temperatura_c);
+    temperatura_f = (1.8*temperatura_c)+32;
+    printf("A temperatura em Fahrenheit e: %.2f\n", temperatura_f);
+    return 0;
+}
+
+7 - Faça um programa que receba três notas, calcule e mostre a média aritmética entre elas.
+
+#include <stdio.h>
+int main(){
+    float N1, N2, N3, media;
+    printf("Digite a primeira nota:");
+    scanf("%f", &N1);
+    printf("Digite a segunda nota:");
+    scanf("%f", &N2);
+    printf("Digite a terceira nota:");
+    scanf("%f", &N3);
+    media = (N1 + N2 + N3) /3.0;
+    printf("A media das tres notas e: %.2f\n", media);
+    return 0;
+}
+
+8 - Faça um programa em Cque receba o salário base de um funcionário, calcule e mostre o seu salário a receber, sabendo-se que o funcionário tem gratificação de R$ 50 e paga imposto de 10% sobre o salário base.
+
+#include <stdio.h>
+int main(){
+    float salario_base, salario_recebido;
+    float bonus = 50;
+    float imposto = 0.10;
+    printf("Digite o salario base do funcionario:");
+    scanf("%f", &salario_base);
+    float valor_descontado = salario_base*imposto;
+    salario_recebido = salario_base + bonus - valor_descontado;
+    printf("O salario a receber e: R$%.2f\n", salario_base);
+    return 0;
+}
