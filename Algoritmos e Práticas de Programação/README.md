@@ -25,8 +25,9 @@ Este repositório reúne implementações de conceitos fundamentais de **Algorit
 
 Os códigos servem como material de estudo e prática para reforçar os conceitos abordados na disciplina.
 
-## ☕︎ Tecnologias Utilizadas 
+## ☕︎ Tecnologias e Linguagens Utilizadas 
 
+- C;
 - Code::Blocks.
 
 ## ☕︎ Como Usar
