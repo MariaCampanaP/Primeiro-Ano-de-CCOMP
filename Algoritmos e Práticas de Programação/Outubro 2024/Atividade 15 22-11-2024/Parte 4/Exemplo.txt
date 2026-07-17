@@ -1,0 +1,2 @@
+Este é um arquivo de exemplo.
+Aqui vamos contar quantas vezes aparece a letra 'e'.

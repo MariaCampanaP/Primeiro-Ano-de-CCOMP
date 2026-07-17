@@ -1,0 +1,248 @@
+Atividade 14 - Subrotina - Parte 4
+
+1. Crie uma subrotina que preencha um vetor com dez números inteiros aleatórios (utilize a função rand() ). Após o preenchimento, solicite um número qualquer ao usuário. Invoque outra subrotina, passando o vetor e o número digitado pelo usuário como parâmetros, e verifique se o número digitado pelo usuário está presente no vetor. Na função principal, informe ao usuário se o número está presente no vetor ou não
+
+#include <stdio.h>
+
+void preencherVetor (int v[]){
+    for (int i = 0; i < 10; i++){
+    v[i] = rand();
+    }
+}
+
+void checarVet (int num, int v[], int *fessor){
+    for (int i = 0; i < 10; i++){
+        if(num == v[i]){
+            *fessor = 1;
+        }
+    }
+}
+
+int main(){
+    int num, v[10], fessor;
+
+    preencherVetor(v);
+
+    printf("Coloque um numero:");
+    scanf("%d", &num);
+
+    checarVet(num, v, &fessor);
+
+    if(fessor == 1){
+        printf("O numero esta presente no vetor!");
+    }else{
+        printf("O numero nao esta presente no vetor!");
+    }
+return 0;
+}
+
+
+2. Faça um programa que armazene, em um registro, os dados de um funcionário de uma empresa, compostos de: Nome, Idade, Sexo (M/F), CPF, Data de Nascimento, Codigo do Setor onde trabalha (0-99), Cargo que ocupa (string de até 30 caracteres) e Salário. Em uma subrotina que recebe o registro como parâmetro passado por referência, receba os dados digitados pelo usuário e armazene-os na estrutura. Na função principal, exiba esses dados na tela.
+
+#include <stdio.h>
+
+struct funcionario {
+    char nome[30], sexo, data_nasc[30], cargo_ocupa[30], cpf[15];
+    int idade, cod_setor;
+    float sal;
+};
+
+typedef struct funcionario Funcionario;
+
+void Ibge(Funcionario *cadastro) {
+    printf("Digite o seu nome: ");
+    fgets(cadastro->nome, sizeof(cadastro->nome), stdin);
+    cadastro->nome[strcspn(cadastro->nome, "\n")] = 0;
+
+    printf("Digite o seu sexo (M/F): ");
+    scanf(" %c", &cadastro->sexo);
+    getchar();
+
+    printf("Digite o seu nascimento DD/MM/AAAA: ");
+    fgets(cadastro->data_nasc, sizeof(cadastro->data_nasc), stdin);
+    cadastro->data_nasc[strcspn(cadastro->data_nasc, "\n")] = 0;
+
+    printf("Digite o seu cargo: ");
+    fgets(cadastro->cargo_ocupa, sizeof(cadastro->cargo_ocupa), stdin);
+    cadastro->cargo_ocupa[strcspn(cadastro->cargo_ocupa, "\n")] = 0;
+
+    printf("Digite a sua idade: ");
+    scanf("%d", &cadastro->idade);
+
+    printf("Digite o seu CPF: ");
+    getchar();
+    fgets(cadastro->cpf, sizeof(cadastro->cpf), stdin);
+    cadastro->cpf[strcspn(cadastro->cpf, "\n")] = 0;
+    printf("Digite o codigo do setor (0-99): ");
+    scanf("%d", &cadastro->cod_setor);
+
+    printf("Digite o seu salario: ");
+    scanf("%f", &cadastro->sal);
+}
+
+int main() {
+    Funcionario cadastro;
+
+    Ibge(&cadastro);
+
+    printf("\n--- Informacoes do Funcionario ---\n");
+    printf("Nome: %s\n", cadastro.nome);
+    printf("Sexo: %c\n", cadastro.sexo);
+    printf("Data de Nascimento: %s\n", cadastro.data_nasc);
+    printf("Cargo: %s\n", cadastro.cargo_ocupa);
+    printf("Idade: %d\n", cadastro.idade);
+    printf("CPF: %s\n", cadastro.cpf);
+    printf("Codigo do Setor: %d\n", cadastro.cod_setor);
+    printf("Salario: %.2f\n", cadastro.sal);
+
+    return 0;
+}
+
+3. Um vendedor recebe um salário fixo mais 6% de comissão sobre suas vendas. Crie um algoritmo que tenha um registro de vendedor, com o salário fixo, valor total de suas vendas, comissão e o salário final. Crie uma sub-rotina que receba um vendedor como parâmetro (por valor ou por referência). Na subrotina, peça ao usuário para digitar o valor do salário fixo, o valor total de vendas e calcule (na mesma subrotina) a comissão e o salário final. Na função principal, mostre todas as informações. Faça isso para dois funcionários diferentes (vetor).
+
+#include <stdio.h>
+
+struct Vendedor{
+    float salario_fixo;
+    float vendas_totais;
+    float comissao;
+    float salario_final;
+};
+
+void calcularSalario(struct Vendedor *v){
+    printf("Digite o salario fixo: ");
+    scanf("%f", &v->salario_fixo);
+    printf("Digite o valor total das vendas: ");
+    scanf("%f", &v->vendas_totais);
+    v->comissao = v->vendas_totais * 0.06;
+    v->salario_final = v->salario_fixo + v->comissao;
+}
+
+int main(){
+
+    struct Vendedor vendedores[2];
+      for (int i = 0; i < 2; i++) {
+        printf("\nVendedor %d\n", i + 1);
+        calcularSalario(&vendedores[i]);
+    }
+
+     for (int i = 0; i < 2; i++) {
+        printf("\n--- Informações do Vendedor %d ---\n", i + 1);
+        printf("Salario Fixo: %.2f\n", vendedores[i].salario_fixo);
+        printf("Vendas Totais: %.2f\n", vendedores[i].vendas_totais);
+        printf("Comissao: %.2f\n", vendedores[i].comissao);
+        printf("Salario Final: %.2f\n", vendedores[i].salario_final);
+     }
+
+     return 0;
+}
+
+4. Faça um programa que controle o estoque de uma loja de brinquedos. Atualmente, no estoque há 40 itens, cada um contendo código, descrição, preço de compra, preço de venda, quantidade em estoque e estoque mínimo. O programa deverá: 
+	- Criar uma rotina para cadastrar os produtos.
+	- Criar uma rotina para mostrar o valor do lucro obtido com a venda de determinado 	produto (inserido pelo usuário) e o percentual que esse valor representa.
+	- Criar uma rotina que mostre os produtos com quantidade em estoque abaixo do 	estoque mínimo permitido.
+
+#include <stdio.h>
+#include <string.h>
+
+struct Produto {
+    int codigo;
+    char descricao[50];
+    float preco_compra;
+    float preco_venda;
+    int quantidade_estoque;
+    int estoque_minimo;
+};
+
+void cadastrarProdutos(struct Produto estoque[], int total_produtos) {
+    for (int i = 0; i < total_produtos; i++) {
+        printf("\n--- Cadastro de Produto %d ---\n", i + 1);
+
+        printf("Digite o codigo do produto: ");
+        scanf("%d", &estoque[i].codigo);
+        getchar();
+
+        printf("Digite a descricao do produto: ");
+        fgets(estoque[i].descricao, sizeof(estoque[i].descricao), stdin);
+        estoque[i].descricao[strcspn(estoque[i].descricao, "\n")] = 0;
+
+        printf("Digite o preco de compra: ");
+        scanf("%f", &estoque[i].preco_compra);
+
+        printf("Digite o preco de venda: ");
+        scanf("%f", &estoque[i].preco_venda);
+
+        printf("Digite a quantidade em estoque: ");
+        scanf("%d", &estoque[i].quantidade_estoque);
+
+        printf("Digite o estoque minimo permitido: ");
+        scanf("%d", &estoque[i].estoque_minimo);
+    }
+}
+
+void calcularLucro(struct Produto estoque[], int total_produtos) {
+    int codigo;
+    printf("\nDigite o codigo do produto para calcular o lucro: ");
+    scanf("%d", &codigo);
+
+    for (int i = 0; i < total_produtos; i++) {
+        if (estoque[i].codigo == codigo) {
+            float lucro = estoque[i].preco_venda - estoque[i].preco_compra;
+            float percentual_lucro = (lucro / estoque[i].preco_compra) * 100;
+
+            printf("\nProduto: %s\n", estoque[i].descricao);
+            printf("Lucro obtido: %.2f\n", lucro);
+            printf("Percentual de lucro: %.2f%%\n", percentual_lucro);
+            return;
+        }
+    }
+
+    printf("\nProduto com codigo %d nao encontrado.\n", codigo);
+}
+
+void mostrarEstoqueBaixo(struct Produto estoque[], int total_produtos) {
+    printf("\nProdutos com estoque abaixo do minimo permitido:\n");
+    for (int i = 0; i < total_produtos; i++) {
+        if (estoque[i].quantidade_estoque < estoque[i].estoque_minimo) {
+            printf("\nProduto: %s\n", estoque[i].descricao);
+            printf("Codigo: %d\n", estoque[i].codigo);
+            printf("Quantidade em estoque: %d\n", estoque[i].quantidade_estoque);
+            printf("Estoque minimo: %d\n", estoque[i].estoque_minimo);
+        }
+    }
+}
+
+int main() {
+    int total_produtos = 40;
+    struct Produto estoque[40];
+
+    int opcao;
+    do {
+        printf("\n--- Menu ---\n");
+        printf("1. Cadastrar produtos\n");
+        printf("2. Calcular lucro de um produto\n");
+        printf("3. Mostrar produtos com estoque abaixo do minimo\n");
+        printf("4. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                cadastrarProdutos(estoque, total_produtos);
+                break;
+            case 2:
+                calcularLucro(estoque, total_produtos);
+                break;
+            case 3:
+                mostrarEstoqueBaixo(estoque, total_produtos);
+                break;
+            case 4:
+                printf("Saindo...\n");
+                break;
+            default:
+                printf("Opcao invalida! Tente novamente.\n");
+        }
+    } while (opcao != 4);
+
+    return 0;
+}

@@ -1,0 +1,5 @@
+Numero: 3
+Nome: Carlos Pereira
+Curso: Arquitetura
+Nota 1: 6.50
+Nota 2: 8.00

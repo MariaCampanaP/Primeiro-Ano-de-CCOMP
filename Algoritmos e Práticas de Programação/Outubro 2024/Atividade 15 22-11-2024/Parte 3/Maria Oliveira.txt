@@ -1,0 +1,5 @@
+Numero: 2
+Nome: Maria Oliveira
+Curso: Medicina 
+Nota 1: 9.00
+Nota 2: 7.50

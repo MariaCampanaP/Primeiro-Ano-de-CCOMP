@@ -1,0 +1,141 @@
+Atividade 13 - Subrotina - Parte 3 
+
+1. Faça uma função que receba dois números a e b, em seguida, faça a troca destes dois números e mostre os valores trocados na função principal. Dica: a e b devem ser passados por referência.
+
+#include <stdio.h>
+
+void mostrarNumeros(int *num1, int *num2){
+    int valorTemporario = *num1;
+    *num1 = *num2;
+    *num2 = valorTemporario;
+}
+
+int main(){
+    int num1, num2;
+
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &num1);
+    printf("Digite o segundo numero: ");
+    scanf("%d", &num2);
+
+    printf("\nAntes da troca: num1 = %d, num2 = %d\n", num1, num2);
+
+    mostrarNumeros(&num1, &num2);
+
+    printf("Apos a troca: num1 = %d, num2 = %d\n", num1, num2);
+
+    return 0;
+}
+
+2. Faça uma uma função que receba dois números a e b, em seguida, decremente o primeiro e incremente o segundo, e mostre os novos valores na função principal. Dica: a e b devem ser passados por referência.
+
+#include <stdio.h>
+
+void incrementarEdecrementar(int *a, int *b){
+    (*a)--;
+    (*b)++;
+}
+
+int main(){
+    int num1, num2;
+
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &num1);
+    printf("Digite o segundo numero: ");
+    scanf("%d", &num2);
+
+    printf("\nAntes da incrementacao e decrementacao: num1 = %d, num2 = %d\n", num1, num2);
+
+    incrementarEdecrementar(&num1, &num2);
+
+    printf("Apos a troca: num1 = %d, num2 = %d\n", num1, num2);
+
+    return 0;
+}
+
+3. Faça uma função que receba o raio (por valor), perímetro (por referência) e área de um círculo (por referência) e calcule o perímetro e área. Em seguida, mostre na função principal o valor do perímetro e da área do círculo.
+
+#include <stdio.h>
+#define PI 3.14
+
+void calcularCirculo(float raio, float *perimetro, float *area){
+    *perimetro = 2 * PI * raio;
+    *area = PI * raio * raio;
+}
+
+int main(){
+    float raio, perimetro, area;
+
+    printf("Digite o valor do raio do circulo: ");
+    scanf("%f", &raio);
+
+    calcularCirculo(raio, &perimetro, &area);
+
+    printf("\nPerimetro do circulo: %.2f\n", perimetro);
+    printf("Area do circulo: %.2f\n", area);
+
+    return 0;
+}
+
+4. Faça uma função que receba os valores a, b e c passados por valor, receba também dois valores x1 e x2 passados por referência. Em seguida, calcule na função e mostre na função principal as duas raízes da equação do segundo grau nas variáveis x1 e x2.
+
+#include <stdio.h>
+#include <math.h>
+
+void calcularRaizes(float a, float b, float c, float *x1, float *x2){
+    float delta;
+
+    delta = b * b - 4 * a * c;
+    if (delta >= 0){
+        *x1 = (-b + sqrt(delta)) / (2 * a);
+        *x2 = (-b - sqrt(delta)) / (2 * a);
+    }else{
+        printf("A equacao nao possui raizes reais (delta < 0)\n");
+    }
+}
+
+int main(){
+    float a, b, c, x1, x2;
+
+    printf("Digite o valor de a: ");
+    scanf("%f", &a);
+    printf("Digite o valor de b: ");
+    scanf("%f", &b);
+    printf("Digite o valor de c: ");
+    scanf("%f", &c);
+
+    if (a != 0){
+        calcularRaizes(a, b, c, &x1, &x2);
+        printf("Raiz x1 = %.2f\n", x1);
+        printf("Raiz x2 = %.2f\n", x2);
+    } else {
+        printf("O valor de 'a' deve ser diferente de zero para ser uma equação de segundo grau.\n");
+    }
+
+    return 0;
+}
+
+5. Desenvolva um programa que leia a quantidade total de segundos e converta para Horas, Minutos e Segundos. Imprima o resultado da conversão na função principal no formato HH:MM:SS. Para isso, utilize a função com protótipo void converteHora(int totalSegundos, int *hora, int *min, int *seg)
+
+#include <stdio.h>
+
+void converterHora(int totalSegundos, int *hora, int *min, int *seg){
+    *hora = totalSegundos / 3600;
+    totalSegundos %= 3600;
+    *min = totalSegundos / 60;
+    *seg = totalSegundos % 60;
+}
+
+int main(){
+    int totalSegundos, hora, min, seg;
+
+    printf("Digite o total de segundos: ");
+    scanf("%d", &totalSegundos);
+
+    converterHora(totalSegundos, &hora, &min, &seg);
+
+    printf("Resultado: %02d:%02d:%02d\n", hora, min, seg);
+
+    return 0;
+}
+

@@ -1,0 +1,2 @@
+Escreva o seu nome:maria
+Escreva a sua idade:18

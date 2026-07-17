@@ -1,0 +1,6 @@
+maria
+18 anos: Entrando na maior idade
+vitor
+19 anos: Maior de idade
+luna
+14 anos: Menor de idade

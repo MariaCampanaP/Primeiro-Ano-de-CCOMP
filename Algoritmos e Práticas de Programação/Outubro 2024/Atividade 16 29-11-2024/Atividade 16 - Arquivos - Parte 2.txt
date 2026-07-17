@@ -1,0 +1,253 @@
+Atividade 16 - Arquivos - Parte 2
+
+1. Faça um programa que receba dois arquivos do usuário, e crie um terceiro arquivo com o conteúdo dos dois primeiros juntos (o conteúdo do primeiro seguido do conteúdo do segundo).
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+
+    FILE* file1;
+    FILE* file2;
+    FILE* file3;
+    char conteudo[500];
+
+    file1 = fopen("arq1.txt", "r");
+    if (file1 == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    file3 = fopen("arq3.txt", "w");
+    if (file3 == NULL){
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return 1;
+    }
+
+    fgets(conteudo, 500, file1);
+    fputs(conteudo, file3);
+
+    fclose(file1);
+
+    file2 = fopen("arq2.txt", "r");
+    if (file2 == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+}
+
+    fgets(conteudo, 500, file2);
+    fputs(conteudo, file3);
+
+    fclose(file2);
+    fclose(file3);
+
+    return 0;
+
+}
+
+2. Faça um programa que receba o nome de um arquivo de entrada e outro de saída. O arquivo de entrada contém em cada linha o nome de N cidades (ocupando 40 caracteres) e o seu número de habitantes. O programa deverá ler o arquivo de entrada e gerar um arquivo de saída onde aparece o nome da cidade mais populosa seguida pelo seu número de habitantes.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+
+    int populacao = 0, populacaom = 0;
+    char cidade[40], entrada[20], saida[20], cidadem[40];
+
+    printf("Digite o nome do arquivo de entrada:\n");
+    gets(entrada);
+    printf("Digite o nome do arquivo de saida:\n");
+    gets(saida);
+
+    FILE* entr;
+    FILE* said;
+
+    entr = fopen(entrada, "r");
+    if (entr == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    said = fopen(saida, "w");
+    if (said == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    while(fscanf(entr, "%s %d", cidade, &populacao) != EOF){
+        if(populacao > populacaom){
+            populacaom = populacao;
+            strcpy(cidadem, cidade);
+        }}
+
+    fprintf(said, "%s %d\n", cidadem, populacaom);
+
+    fclose(entr);
+    fclose(said);
+
+    return 0;
+
+}
+
+3. Faça um programa que receba como entrada o ano corrente e o nome de dois arquivos: um de entrada e outro de saída. Cada linha do arquivo de entrada contém o nome de N pessoas (ocupando 40 caracteres) e o seu ano de nascimento. O programa deverá ler o arquivo de entrada e gerar um arquivo de saída onde aparece o nome da pessoa seguida por uma string que representa a sua idade.
+• Se a idade for menor do que 18 anos, escreva “menor de idade”
+• Se a idade for maior do que 18 anos, escreva “maior de idade”
+• Se a idade for igual a 18 anos, escreva “entrando na maior idade”
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+
+    int anoC = 0, anoNasc = 0, idade = 0;
+    char nome[40], entrada[20], saida[20];
+
+    printf("Digite o nome do arquivo de entrada:\n");
+    gets(entrada);
+    printf("Digite o nome do arquivo de saida:\n");
+    gets(saida);
+    fflush(stdin);
+    printf("Digite o ano atual:");
+    scanf("%d", &anoC);
+
+    FILE* entr;
+    FILE* said;
+
+    entr = fopen(entrada, "r");
+    if (entr == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    said = fopen(saida, "w");
+    if (said == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    while(fscanf(entr, "%s %d", nome, &anoNasc) != EOF){
+            idade = anoC - anoNasc;
+        if(idade < 18){
+            fprintf(said, "%s\n%d anos: Menor de idade\n", nome, idade);
+        } else if(idade > 18){
+            fprintf(said, "%s\n%d anos: Maior de idade\n", nome, idade);
+        }else if(idade == 18){
+            fprintf(said, "%s\n%d anos: Entrando na maior idade\n", nome, idade);
+        }
+    }
+
+    fclose(entr);
+    fclose(said);
+
+    return 0;
+
+}
+
+4. Uma loja possui 4 filiais, cada uma com um código de 1 a 4. Um arquivo contendo todas as vendas feitas durante o dia nas quatro filiais é gerado a partir de uma planilha, sendo que cada linha do arquivo contém o número da filial e o valor de uma venda efetuada, separados por vírgula. Ex.:
+
+-> 1,189.90
+-> 1,47.70
+-> 3,29.90
+-> 4,55.00
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+
+    int codigo = 0;
+    float valor;
+    char saida[20];
+
+    printf("Digite o nome do arquivo de saida:\n");
+    gets(saida);
+    fflush(stdin);
+
+    FILE* said;
+
+    said = fopen(saida, "w");
+    if (said == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+        do{
+        printf("Digite o codigo da filial:");
+        scanf("%d", &codigo);
+
+        if(codigo != 0){
+        printf("Digite o valor da filial:");
+        scanf("%f", &valor);
+        fprintf(said, "%d,%.2f\n", codigo, valor);
+        } else {
+            break;
+
+        }}while(codigo != 0);
+
+    fclose(said);
+
+    return 0;
+
+}
+
+
+5. No exemplo acima, a filial 1 fez duas vendas, a primeira totalizando R$ 189,90 e a segunda R$ 45,70. A filial 3 fez uma venda de R$ 29,90 e a 4 também uma de R$ 55,00. Faça um programa que leia este arquivo e informe, ao final, o total e o valor médio das vendas de cada filial.
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main(){
+
+    int codigo = 0, c1 = 0, c2 = 0, c3 = 0, c4 = 0;
+    float valor, vt1 = 0, vt2 = 0, vt3 = 0, vt4 = 0, m1 = 0, m2 = 0, m3 = 0, m4 = 0;
+    char entrada[20], virgula;
+
+    printf("Digite o nome do arquivo de entrada:\n");
+    gets(entrada);
+    fflush(stdin);
+
+    FILE* entr;
+
+    entr = fopen(entrada, "r");
+    if (entr == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    while(fscanf(entr, "%d %c %f", &codigo, &virgula, &valor) != EOF){
+        if(codigo == 1){
+            c1++;
+            vt1 = vt1 + valor;
+            m1 = vt1/c1;
+        } else if(codigo == 2){
+            c2++;
+            vt2 = vt2 + valor;
+            m2 = vt2/c2;
+        } else if(codigo == 3){
+            c3++;
+            vt3 = vt3 + valor;
+            m3 = vt3/c3;
+        } else if(codigo == 4){
+            c4++;
+            vt4 = vt4 + valor;
+            m4 = vt4/c4;
+        }}
+
+    fclose(entr);
+
+        printf("Filial 1\nValor Total: R$%.2f\nMedia: R$%.2f\n", vt1, m1);
+        printf("Filial 2\nValor Total: R$%.2f\nMedia: R$%.2f\n", vt2, m2);
+        printf("Filial 3\nValor Total: R$%.2f\nMedia: R$%.2f\n", vt3, m3);
+        printf("Filial 4\nValor Total: R$%.2f\nMedia: R$%.2f\n", vt4, m4);
+
+    return 0;
+
+}
+
+
+

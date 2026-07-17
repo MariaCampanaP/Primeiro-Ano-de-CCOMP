@@ -1,0 +1,253 @@
+Atividade 15 - Arquivos - Parte 1
+
+1. Escreva um programa que: 
+Crie/abra um arquivo de texto de nome "arq.txt";
+Permita que o usuário grave diversos caracteres nesse arquivo, até que o usuário entre com o caractere '0';
+Feche o arquivo; 
+Agora, abra e leia o arquivo, caractere por caractere, e escreva na tela todos os caracteres armazenados.
+
+#include <stdio.h>
+
+int main(){
+
+    FILE *file;
+    char ch;
+
+    file = fopen("arq.txt", "w");
+    if (file == NULL){
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        return 1;
+    }
+
+    printf("Digite os caracteres (Digite o '0' para finalizar):\n");
+
+    while(1){
+        ch = getchar();
+
+        if (ch == '0'){
+            break;
+        }
+
+        fputc(ch, file);
+    }
+
+    fclose(file);
+
+    file = fopen("arq.txt", "r");
+    if (file == NULL){
+        printf("Erro ao abir o arquivo para leitura.\n");
+        return 1;
+    }
+
+    printf("\nConteudo do arquivo:\n");
+
+    while((ch = fgetc(file)) != EOF){
+        putchar(ch);
+    }
+
+    fclose(file);
+
+    return 0;
+}
+
+2. Faça um programa que receba do usuário um arquivo de texto e mostre na tela quantas letras são vogais.
+
+#include <stdio.h>
+
+int main(){
+
+    FILE *file;
+    char filename[100];
+    char ch;
+    int contadorVogais = 0;
+
+    printf("Digite o nome do arquivo:");
+    scanf("%s", filename);
+
+    file = fopen(filename, "r");
+    if (file == NULL){
+        perror("Erro ao abrir o arquivo.\n");
+        return 1;
+    }
+
+    while((ch = fgetc(file)) != EOF){
+       if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U'){
+        contadorVogais++;
+       }
+    }
+
+    fclose(file);
+
+    printf("O arquivo contem %d vogais.\n", contadorVogais);
+
+    return 0;
+}
+
+3. Faça um programa que salvará dados de alunos em arquivos. Um aluno será composto pelos seguintes campos: numero, nome, curso, nota1, nota2. Cada campo será informado pelo usuário. O seu programa deverá criar um arquivo chamado NomeDoAluno.txt (haverá um arquivo por aluno) e salvar as informações do aluno neste arquivo. Teste seu programa com 3 alunos.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct{
+
+    int numero;
+    char nome[100];
+    char curso[100];
+    float nota1;
+    float nota2;
+
+} Aluno;
+
+void salvarAluno(Aluno aluno){
+
+    char nomeArquivo[150];
+    sprintf(nomeArquivo, "%s.txt", aluno.nome);
+
+    FILE *arquivo = fopen(nomeArquivo, "w");
+    if (arquivo == NULL){
+        printf("Erro ao abrir o arquivo!\n");
+        return;
+    }
+
+    fprintf(arquivo,"Numero: %d\n", aluno.numero);
+    fprintf(arquivo,"Nome: %s\n", aluno.nome);
+    fprintf(arquivo,"Curso: %s\n", aluno.curso);
+    fprintf(arquivo,"Nota 1: %.2f\n", aluno.nota1);
+    fprintf(arquivo,"Nota 2: %.2f\n", aluno.nota2);
+
+    fclose(arquivo);
+
+    printf("Dados do aluno %s salvo com sucesso em %s\n\n", aluno.nome, nomeArquivo);
+
+}
+
+int main(){
+
+    Aluno aluno;
+    int i;
+
+    for (i = 0; i < 3; i++){
+        printf("Digite os dados do aluno %d\n", i + 1);
+
+        printf("Numero:");
+        scanf("%d", &aluno.numero);
+
+        printf("Nome:");
+        scanf(" %[^\n]", aluno.nome);
+
+        printf("Curso:");
+        scanf(" %[^\n]", aluno.curso);
+
+        printf("Nota 1:");
+        scanf("%f", &aluno.nota1);
+
+        printf("Nota 2:");
+        scanf("%f", &aluno.nota2);
+
+        salvarAluno(aluno);
+
+    }
+
+    return 0;
+}
+
+4. Faça um programa que receba do usuário um arquivo texto e um caracter. Mostre na tela quantas vezes aquele caractere ocorre dentro do arquivo.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int contarCaracteres(const char *nomeArquivo, char caractere){
+
+    FILE *arquivo = fopen(nomeArquivo, "r");
+    if (arquivo == NULL){
+        printf("Erro ao abrir o arquivo %s.\n", nomeArquivo);
+        return -1;
+}
+
+    int contador = 0;
+    char c;
+
+    while ((c = fgetc(arquivo)) != EOF){
+        if(c == caractere){
+            contador++;
+        }
+    }
+
+    fclose(arquivo);
+    return contador;
+
+}
+
+int main(){
+
+    char nomeArquivo[100];
+    char caractere;
+
+    printf("Digite o nome do arquivo (com a extensao):");
+    scanf("%s", nomeArquivo);
+
+    printf("Digite o caractere a ser contado:");
+    scanf(" %c", &caractere);
+
+    int resultado = contarCaracteres(nomeArquivo, caractere);
+    if (resultado != -1){
+        printf("O caractere '%c' ocorre %d vezes no arquivo '%s'.\n", caractere, resultado, nomeArquivo);
+    }
+
+    return 0;
+
+}
+
+5. Faça um programa que receba do usuário um arquivo texto. Crie outro arquivo texto contendo o texto do arquivo de entrada, mas com as vogais substituídas por '*'
+
+#include <stdio.h>
+#include <stdlib.h>
+
+void substituirVogais(const char *entrada, const char *saida){
+
+    FILE *arquivoEntrada = fopen(entrada, "r");
+    if (arquivoEntrada == NULL){
+        printf("Erro ao abrir o arquivo %s.\n", entrada);
+        return;
+    }
+
+    FILE *arquivoSaida = fopen(saida, "w");
+    if (arquivoSaida == NULL){
+        printf("Erro ao criar o arquivo %s.\n", saida);
+        fclose(arquivoEntrada);
+        return;
+    }
+
+    char c;
+
+    while ((c = fgetc(arquivoEntrada)) != EOF){
+        if (c == 'a' || c == 'A' || c == 'e' || c == 'E' || c == 'i' || c == 'I' || c == 'o' || c == 'O' || c == 'u' || c == 'U') {
+            c = '*';
+    }
+
+    fputc(c, arquivoSaida);
+
+    }
+
+}
+
+int main(){
+
+    char nomeArquivoEntrada[100];
+    char nomeArquivoSaida[100];
+
+    printf("Digite o nome do arquivo de entrada (com extensao):");
+    scanf("%s", nomeArquivoEntrada);
+
+    sprintf(nomeArquivoSaida, "saida_%s", nomeArquivoEntrada);
+
+    substituirVogais(nomeArquivoEntrada, nomeArquivoSaida);
+
+    printf("O arquivo de saida '%s' foi criado com as vogais substituidas por '*'.\n", nomeArquivoSaida);
+
+    return 0;
+}
+
+
+
+
