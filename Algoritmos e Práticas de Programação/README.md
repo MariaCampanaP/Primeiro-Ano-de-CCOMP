@@ -31,11 +31,17 @@ Os códigos servem como material de estudo e prática para reforçar os conceito
 
 ## ☕︎ Como Usar
 
-1. Clone o repositório para o seu computador:
-   
-   ```bash
-   git clone https://github.com/MariaCampanaP/Algoritmos-e-Tecnicas-de-Programacao.git
-   ````
-   
+## Como clonar apenas esta pasta
+
+Este repositório contém a disciplina do 1° ano. Se quiser baixar **somente** a pasta "Algoritmos e Técnicas de Programação", use o sparse-checkout do Git:
+
+```bash
+git clone --no-checkout https://github.com/MariaCampanaP/Primeiro-Ano-de-CCOMP.git
+cd Primeiro-Ano-de-CCOMP
+git sparse-checkout init --cone
+git sparse-checkout set "Algoritmos e Técnicas de Programação"
+git checkout main
+```
+
 <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=120&color=FFFF00&reversal=false&section=footer"/>
 
