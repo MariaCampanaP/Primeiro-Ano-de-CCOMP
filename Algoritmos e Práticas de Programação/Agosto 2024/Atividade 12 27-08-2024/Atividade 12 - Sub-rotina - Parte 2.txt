@@ -1,0 +1,208 @@
+Atividade 12 - Sub-rotina - Parte 2
+
+1. Escreva uma função que receba 3 notas de um aluno e uma letra. Se a letra for A, a função retorna a média aritmética das notas do aluno; se for P, a sua média ponderada (pesos: 5, 3 e 2, respectivamente). Mostre a média (aritmética ou ponderada) na função principal.
+
+#include <stdio.h>
+
+float calcularMedia(float nota1, float nota2, float nota3, char tipo) {
+    float media;
+    if (tipo == 'A' || tipo == 'a') {
+        media = (nota1 + nota2 + nota3) / 3;
+    } else if (tipo == 'P' || tipo == 'p') {
+        media = (nota1 * 5 + nota2 * 3 + nota3 * 2) / 10;
+    } else {
+        media = -1;
+    }
+    return media;
+}
+
+int main() {
+    float nota1, nota2, nota3, media;
+    char tipo;
+
+    printf("Digite a primeira nota: ");
+    scanf("%f", &nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &nota2);
+    printf("Digite a terceira nota: ");
+    scanf("%f", &nota3);
+    printf("Digite 'A' para media aritmetica ou 'P' para media ponderada: ");
+    scanf(" %c", &tipo);
+
+    media = calcularMedia(nota1, nota2, nota3, tipo);
+
+    if (media == -1) {
+        printf("Tipo de media invalido.\n");
+    } else {
+        printf("A media calculada e: %.2f\n", media);
+    }
+
+    return 0;
+}
+
+2. Um professor muito legal fez 3 provas durante um semestre mas só vai levar em conta as duas notas mais altas para calcular a média. Faça uma aplicação em C que peça o valor das 3 notas e, com funções, calcule a média com essas três provas e a média com as duas notas mais altas. Mostre, na função principal, ambas as médias, bem como a nota mais alta e a nota mais baixa.
+
+#include <stdio.h>
+float mediaTresNotas(float nota1, float nota2, float nota3){
+    return (nota1 + nota2 + nota3)/3.0;
+}
+
+float mediaDuasMaiores(float nota1, float nota2, float nota3){
+    float menor;
+
+    if (nota1 <= nota2 && nota1 <= nota3){
+        menor = nota1;
+    }else if(nota2 <= nota1 && nota2 <= nota3){
+        menor = nota2;
+    }else{
+        menor = nota3;
+    }
+
+return (nota1 + nota2 + nota3 - menor)/2.0;
+
+}
+
+void encontrarMaiorEMenor(float nota1, float nota2, float nota3, float *maior, float *menor) {
+    *maior = nota1;
+    *menor = nota1;
+
+    if (nota2 > *maior){
+        *maior = nota2;
+    }
+    if (nota3> *maior){
+        *maior = nota3;
+    }
+
+    if(nota2 < *menor){
+        *menor = nota2;
+    }
+    if (nota3 < *menor){
+        *menor = nota3;
+    }
+}
+
+int main() {
+    float nota1, nota2, nota3;
+    float media3, media2, maiorNota, menorNota;
+
+    printf("Digite a primeira nota: ");
+    scanf("%f", &nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &nota2);
+    printf("Digite a terceira nota: ");
+    scanf("%f", &nota3);
+
+    media3 = mediaTresNotas(nota1, nota2, nota3);
+    media2 = mediaDuasMaiores(nota1, nota2, nota3);
+    encontrarMaiorEMenor(nota1, nota2, nota3, &maiorNota, &menorNota);
+
+    printf("Media das tres notas: %.2f\n", media3);
+    printf("Media das duas notas mais altas: %.2f\n", media2);
+    printf("Nota mais alta: %.2f\n", maiorNota);
+    printf("Nota mais baixa: %.2f\n", menorNota);
+
+    return 0;
+}
+
+3. Escreva uma função que recebes 3 valores reais X, Y e Z e que verifique se esses valores podem ser os comprimentos dos lados de um triângulo e, neste caso, retornar qual o tipo de triângulo formado. Para que X, Y e Z formem um triângulo é necessário que a seguinte propriedade seja satisfeita: o comprimento de cada lado de um triângulo é menor do que a soma do comprimento dos outros dois lados. A função deve identificar o tipo de triângulo formado observando as seguintes definições:
+	- Triângulo Equilátero: os comprimentos dos 3 lados são iguais.
+	- Triângulo Isósceles: os comprimentos de 2 lados são iguais.
+	- Triângulo Escaleno: os comprimentos dos 3 lados são diferentes.
+
+#include <stdio.h>
+#include <stdbool.h>
+
+bool formaTriangulo(float x, float y, float z){
+    return (x < y + z)&&(y < x + z)&&(z < x + y);
+}
+
+const char* tipoTriangulo(float x, float y, float z){
+    if (x == y && y == z){
+        return "Equilatero";
+    }else if (x == y || y == z || x == z){
+        return "Isosceles";
+    }else{
+        return "Escaleno";
+    }
+}
+
+int main(){
+    float x, y, z;
+
+    printf("Digite o comprimento do lado X:");
+    scanf("%f", &x);
+    printf("Digite o comprimento do lado Y:");
+    scanf("%f", &y);
+    printf("Digite o comprimento do lado Z:");
+    scanf("%f", &z);
+
+    if(formaTriangulo(x, y, z)){
+        printf("Os lados formam um triangulo do tipo:%s\n", tipoTriangulo(x, y, z));
+    }else{
+        printf("Os lados nao formam um triangulo.\n");
+    }
+return 0;
+}
+
+
+4. Faça uma função que recebe a idade de um nadador por parâmetro e retorna, também por parâmetro, a categoria desse nadador de acordo com a tabela abaixo:  
+
+Idade                                          Categoria5 a 7 anos                                       Infantil A
+8 a 10 anos                                    Infantil B
+11-13 anos                                     Juvenil A
+14-17 anos                                     Juvenil B
+Maiores de 18 anos (inclusive)    Adulto
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+int  InfantilA (int idade){
+    if(idade  >= 5 && idade <= 7){
+    printf("A categoria do nadador e: Infantil A\n");
+    return 1;
+    }
+}
+
+int  InfantilB (int idade){
+    if(idade  >= 8 && idade <= 10){
+    printf("A categoria do nadador e: Infantil B\n");
+    return 2;
+    }
+}
+
+int  JuvenilA (int idade){
+    if(idade  >= 11 && idade <= 13){
+    printf("A categoria do nadador e: Juvenil A\n");
+    return 3;
+    }
+}
+
+int  JuvenilB (int idade){
+    if(idade  >= 14 && idade <= 17){
+    printf("A categoria do nadador e: Juvenil B \n");
+    return 4;
+    }
+}
+
+int  Adulto (int idade){
+    if(idade  >= 18){
+    printf("A categoria do nadador e:  Adulto \n");
+    return 5;
+    }
+}
+
+int main(){
+
+    int idade = 0;
+    printf("digite sua idade: ");
+    scanf("%d", &idade);
+    printf("\n");
+    InfantilA(idade);
+    InfantilB(idade);
+    JuvenilA(idade);
+    JuvenilB(idade);
+    Adulto(idade);
+
+return 0;
+}

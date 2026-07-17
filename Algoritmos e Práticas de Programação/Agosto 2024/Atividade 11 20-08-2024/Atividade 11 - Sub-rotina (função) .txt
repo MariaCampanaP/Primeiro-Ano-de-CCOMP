@@ -1,0 +1,84 @@
+Atividade 11 - Sub-rotina (função) - Parte 1
+
+1. Implemente uma função que receba dois números inteiros e apresente o maior número.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void calcular_Numero(int n1, int n2){
+    if(n1 > n2){
+        printf("Maior: %d", n1);
+    }else{
+        printf("Maior: %d", n2);
+    }
+
+}
+
+int main(){
+    int n1;
+    int n2;
+
+    printf("Digite o primeiro numero: ");
+    scanf("%d", &n1);
+    printf("Digite o segundo numero: ");
+    scanf("%d", &n2);
+
+    calcular_Numero(n1, n2);
+
+return 0;
+}
+
+2. Implemente uma função que receba um número e apresente a raiz quadrada do mesmo.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+void calcular_Raizquadrada(double numero, double raizQuadrada){
+    raizQuadrada = sqrt(numero);
+    printf("A raiz quadrada de %.2f e %.2f\n", numero, raizQuadrada);
+}
+
+int main(){
+    double numero;
+    double raizQuadrada;
+
+    printf("Digite um numero: ");
+    scanf("%lf", &numero);
+
+    calcular_Raizquadrada(numero, raizQuadrada);
+
+return 0;
+
+}
+
+3. Escreva uma função que calcule e mostre a distância entre dois pontos (x1, y1) e (x2, y2). Todos os números devem ser do tipo float.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+void calcularEMostrarDistancia(float x1, float y1, float x2, float y2) {
+    float distancia;
+    distancia = sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    printf("A distância entre os pontos (%.2f, %.2f) e (%.2f, %.2f) e %.2f\n", x1, y1, x2, y2, distancia);
+}
+
+int main() {
+    float x1, y1, x2, y2;
+
+    printf("Digite as coordenadas do ponto 1 (x1, y1): ");
+    scanf("%f %f", &x1, &y1);
+    printf("Digite as coordenadas do ponto 2 (x2, y2): ");
+    scanf("%f %f", &x2, &y2);
+
+    calcularEMostrarDistancia(x1, y1, x2, y2);
+
+    return 0;
+}
+
+
+
