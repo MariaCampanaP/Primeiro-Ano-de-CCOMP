@@ -1,0 +1,311 @@
+Atividade 5 - Estruturas Condicionais 
+
+1. Faça um programa que receba quatro notas de um aluno, calcule e mostre a média aritmética das notas e a mensagem de aprovado ou reprovado, considerando para aprovação média 7.
+
+#include <stdio.h>
+int main(){
+    float nota1, nota2, nota3, nota4, media;
+    printf("Digite a primeira nota: ");
+    scanf("%f", &nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &nota2);
+    printf("Digite a terceira nota: ");
+    scanf("%f", &nota3);
+    printf("Digite a quarta nota: ");
+    scanf("%f", &nota4);
+    media = (nota1 + nota2 + nota3 + nota4)/4.0;
+    if (media >= 7.0){
+        printf("Media: %.2f\nAprovado!\n", media);
+    }else{
+        printf("Media: %.2f\nReprovado!\n", media);
+    }
+    return 0;
+}
+
+
+2. Faça um programa que receba duas notas, calcule e mostre a média aritmética e uma mensagem de acordo com as seguint
+s condições: 
+
+- de 0,0 a 3,9 -> "Reprovado";
+- de 4,0 a 6,9 -> "Exame";
+- 7,0 ou mais -> "Aprovado".
+
+#include <stdio.h>
+int main(){
+    float nota1, nota2, media;
+    printf("Digite a primeira nota: ");
+    scanf("%f", &nota1);
+    printf("Digite a segunda nota: ");
+    scanf("%f", &nota2);
+    media = (nota1 + nota2)/2.0;
+    if (media >= 0.0 && media < 4.0){
+        printf("Media: %.2f\nReprovado!\n", media);
+    }else if (media >= 4.0 && media < 7.0){
+        printf("Media: %.2f\nExame!\n", media);
+        }else{
+            printf("Media: %.2f\nAprovado!\n", media);
+        }
+        return 0;
+    }
+
+3. Faça um programa que recebe dois números e mostre o maior deles.
+
+#include <stdio.h>
+int main() {
+    float numero1, numero2;
+    printf("Digite o primeiro numero inteiro: ");
+    scanf("%f", &numero1);
+    printf("Digite o segundo numero inteiro: ");
+    scanf("%f", &numero2);
+    if (numero1 > numero2){
+        printf("O maior numero e: %.2f\n", numero1);
+    }else if (numero2 > numero1){
+        printf("O maior numero e: %.2f\n", numero2);
+    }
+    return 0;
+}
+
+4. Faça um programa que receba dois números e um código, e execute as operações listadas a seguir, de acordo com o código digitado pelo usuário.
+
+- Código 1: Mostra a média entre os números digitados;
+- Código 2: Mostra a diferença do maior pelo menor;
+- Código 3: Mostra o produto entre os números digitados;
+- Código 4: Mostra a divisão do primeiro pelo segundo.
+
+#include <stdio.h>
+int main(){
+    float num1, num2, resultado;
+    int codigo;
+    printf("Digite o primeiro numero:");
+    scanf("%f", &num1);
+    printf("Digite o segundo numero:");
+    scanf("%f", &num2);
+    printf("Digite o codigo:");
+    scanf("%d", &codigo);
+    switch (codigo){
+    case 1:
+        resultado = (num1 + num2)/2;
+        printf("A media entre os numeros e: %.2f\n", resultado);
+        break;
+    case 2:
+        if (num1 > num2){
+                resultado = num1 - num2;
+        }else{
+                resultado = num2 - num1;
+        }
+        printf("A diferenca do maior pelo menor e: %.2f\n", resultado);
+        break;
+    case 3:
+        resultado = num1 * num2;
+        printf("O produto entre os dois numeros e: %.2f\n", resultado);
+        break;
+    case 4:
+        if (num2!= 0){
+            resultado = num1 / num2;
+            printf("A divisao do primeiro pelo segundo e: %.2f\n", resultado);
+        }else{
+            printf("Erro: divisao por zero nao e permitida.\n");
+        }
+        break;
+    default:
+        printf("Codigo invalido, digitar 1, 2, 3 ou 4.\n");
+        break;
+    }
+    return 0;
+}
+
+
+5. Uma empresa decide dar um aumento de 30% aos funcionários com salários inferiores a R$ 500,00. Faça um programa que receba o salário do funcionário e mostre o valor dos salário reajustado ou uma mensagem, caso ele não tenha direito ao aumento.
+
+#include <stdio.h>
+int main(){
+    float salario, novo_salario;
+    float salario_limite = 500.00;
+    float aumento = 0.30;
+    printf("Digite o salario do funcionario: R$");
+    scanf("%f", &salario);
+    if (salario < salario_limite){
+        novo_salario = salario + (salario * aumento);
+        printf("O novo salario e: R$ %.2f\n", novo_salario);
+    }else{
+        printf("O funcionario nao tem direito ao aumento");
+    }
+    return 0;
+}
+
+6. Faça um programa que receba o salário atual de um funcionário e, usando as condições a seguir, calcule e mostre o valor do aumento e o novo salário:
+
+- Até 499,99 de salário: Aumento de 15%;
+- De 500,00 a 1.499,99 de salário: Aumento de 10%;
+- De 1.500,00 a 2.499,99 de salário: Aumento de 5%;
+- 2.500,00 ou mais de salário: Sem aumento.
+
+#include <stdio.h>
+int main(){
+    float sal_atual, aumento, novo_sal;
+    printf("Digite o salario atual:");
+    scanf("%f", &sal_atual);
+    if (sal_atual <= 499.99){
+        aumento = sal_atual * 0.15;
+    }else if (sal_atual >= 500.00 && sal_atual <= 1499.99){
+        aumento = sal_atual * 0.10;
+    }else if (sal_atual >= 1500.00 && sal_atual <= 2499.99){
+        aumento = sal_atual * 0.05;
+    }else{
+        aumento = 0.0;
+    }
+    novo_sal = sal_atual + aumento;
+    printf("Mostrar o valor do aumento:R$ %.2f\n", aumento);
+    printf("Mostar o novo salario:R$ %.2f\n", novo_sal);
+return 0;
+}
+
+7. Uma agencia bancária possui dois tipos de investimentos, conforme os códigos a seguir. Faça um programa que receba o tipo de investimento e o valor investido, calcule e mostre o valor corrigido após um mês de investimento, de acordo com o tipo de investimento.
+
+- Código 1 - Poupança: 0.5% de rendimento ao mês;
+- Código 2 - Fundos de renda fixa: 1.1% de rendimento ao mês.
+
+#include <stdio.h>
+int main(){
+    int codigo;
+    float valorInvestido, valorNovo;
+    printf("Digite o codigo de investimento (1 para poupanca, 2 para fundo de renda fixa):");
+    scanf("%d", &codigo);
+    printf("Digite o valor investido:");
+    scanf("%f", &valorInvestido);
+    if (codigo == 1){
+        valorNovo = valorInvestido * (1 + 0.005);
+    }else if (codigo == 2){
+        valorNovo = valorInvestido * (1 + 0.011);
+    }else {
+         printf("Codigo de investimento invalido\n");
+         return 1;
+    }
+    printf("O novo valor apos um mes e: %.2f\n", valorNovo);
+    return 0;
+}
+
+8. Faça um programa que receba a idade de um nadador e mostre sua categoria, usando as condições a seguir. Para idade inferior a 5, deverá mostrar a mensagem "Sem categoria ainda".
+
+- 5 a 7 anos: infantil;
+- 8 a 10 anos: juvenil;
+- 11 a 15 anos: adolescente;
+- 16 a 30 anos: adulto;
+- +30 anos: senior.
+
+#include <stdio.h>
+int main(){
+    int idade;
+    printf("Digite a idade do nadador: ");
+    scanf("%d", &idade);
+    if (idade < 5){
+        printf("Sem categoria ainda. \n");
+    }else if (idade >= 5 && idade <= 7){
+        printf("Categoria:Infantil. \n");
+    }else if (idade >= 8 && idade <= 10){
+        printf("Categoria:Juvenil. \n");
+    }else if (idade >= 11 && idade <= 15){
+        printf("Categoria:Adolescente. \n");
+    }else if (idade >= 16 && idade <= 30){
+        printf("Categoria:Adulto. \n");
+    }else {
+        printf("Categoria:Senior. \n");
+    }
+    return 0;
+}
+
+9. Faça um programa que receba o código do produto comprado e a quantidade do produto. Calcule e mostre:
+
+a) O preço unitário do produto comprado, seguindo as condições I abaixo;
+b) O preço total da conta;
+c) O valor do desconto, seguindo as condições II e aplicado sobre o preço total da nota;
+d) O preço final da nota depois do desconto
+
+CONDIÇÕES I:
+
+- Código 1 a 10: R$10,00 (unidade);
+- Código 11 a 20: R$15,00.
+
+(unidade)
+
+- Código 21 a 30: R$20,00 (unidade);
+- Código 31 a 40: R$30,00 (unidade).
+
+CONDIÇÕES II
+
+- Até R$250,00 -> desconto de 5%;
+- Entre R$250,00 e R$500,00 -> desconto de 10%;
+- Acima de R$500,00 -> desconto de 15%.
+
+#include <stdio.h>
+int main(){
+    int codigo, quantidade;
+    float preco_unitario, preco_total, desconto, preco_final;
+    printf("Digite o codigo do produto: ");
+    scanf("%d", &codigo);
+    printf("Digite a quantidade que foi comprada: ");
+    scanf("%d", &quantidade);
+    if (codigo >= 1 && codigo <= 10){
+        preco_unitario = 10.0;
+    }else if (codigo >= 11 && codigo <= 20){
+        preco_unitario = 15.0;
+    }else if (codigo >= 21 && codigo <= 30){
+        preco_unitario = 20.0;
+    }else if (codigo >= 31 && codigo <= 40){
+        preco_unitario = 30.0;
+    }else{
+        printf("Codigo de produto invalido. \n");
+        return 1;
+    }
+    preco_total = preco_unitario * quantidade;
+    if (preco_total <= 2500){
+        desconto = preco_total * 0.05;
+    }else if (preco_total <= 500){
+        desconto = preco_total * 0.10;
+    }else{
+        desconto = preco_total * 0.15;
+    }
+    preco_final = preco_total - desconto;
+    printf("Preco unitario:R$ %.2f\n", preco_unitario);
+    printf("Preco total da conta:R$ %.2f\n", preco_total);
+    printf("Valor do desconto:R$ %.2f\n", desconto);
+    printf("Preco final da conta:R$ %.2f\n", preco_final);
+    return 0;
+    }
+
+10. Uma empresa decidiu dar uma gratificação de Natal a seus funcionários, baseada no número de horas extras e no número de horas que o funcionário faltou ao trabalho. O valor do prêmio é obtido pela consulta às condições que se segue, na qual: H = número de horas extras - (2/3 * (número de horas falta)). Mostre na tela o valor do prêmio recebido.
+
+- H maior que 2.400 -> prêmio de R$500,00;
+- H entre 1.800 e 2.400 -> prêmio de R$400,00;
+- H entre 600 e 1.200 -> prêmio de R$200,00;
+- H menor que 600 -> prêmio de R$100,00.
+
+#include <stdio.h>
+int main(){
+    int horas_extras, horas_faltadas;
+    float H, premio;
+    printf("Digite o numero de horas extras: ");
+    scanf("%d", &horas_extras);
+    printf("Digite o numero de horas que faltou ao trabalho: ");
+    scanf("%d", &horas_faltadas);
+    H = horas_extras - (2.0 / 3.0 * horas_faltadas);
+    if (H > 2400){
+        premio = 500.0;
+    }else if (H >= 1800){
+        premio = 400.0;
+    }else if (H >= 1200){
+        premio = 300.0;
+    }else if (H >= 600){
+        premio = 200.0;
+    }else {
+        premio = 100.0;
+    }
+    printf("Valor do premio:R$ %.2f\n", premio);
+    return 0;
+}
+
+
+
+
+
+
