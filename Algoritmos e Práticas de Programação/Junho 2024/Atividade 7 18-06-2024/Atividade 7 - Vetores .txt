@@ -1,0 +1,220 @@
+Atividade 7 - Vetores 
+
+1 - Faça um programa que preencha um vetor com nove números inteiros, calcule e mostre os números pares e suas respectivas posições no vetor (índice).
+
+#include <stdio.h>
+int main(){
+    int vetor[9];
+    int i;
+    printf("Digite 9 numeros inteiros\n");
+    for(i = 0; i < 9; i++){
+        printf("Digite o %d numero inteiro:", i + 1);
+        scanf("%d", &vetor[i]);
+    }
+    printf("\nNumeros pares e suas posicoes no vetor:\n");
+    for(i = 0; i < 9; i++){
+        if(vetor[i] % 2 == 0){
+        printf("Numero par %d encontrado na posicao %d\n", vetor[i], i);
+    }
+}
+return 0;
+}
+
+2. Faça um programa que receba a temperatura média de cada mês do ano, armazenando-as em um vetor. Calcule e mostre a maior e a menor temperatura do ano e em que mês ocorreram (mostrar o mês por extenso: 1 – janeiro, 2 – fevereiro...). Desconsidere empates.
+
+#include <stdio.h>
+int main() {
+    float temperaturas[12];
+    char *meses[12] = {
+        "janeiro", "fevereiro", "marco", "abril", "maio", "junho",
+        "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"
+    };
+    float temp_max, temp_min;
+    int mes_max, mes_min;
+    for (int i = 0; i < 12; i++) {
+        printf("Digite a temperatura media de %s: ", meses[i]);
+        scanf("%f", &temperaturas[i]);
+    }
+    temp_max = temp_min = temperaturas[0];
+    mes_max = mes_min = 0;
+    for (int i = 1; i < 12; i++) {
+        if (temperaturas[i] > temp_max) {
+            temp_max = temperaturas[i];
+            mes_max = i;
+        }
+        if (temperaturas[i] < temp_min) {
+            temp_min = temperaturas[i];
+            mes_min = i;
+        }
+    }
+    printf("\nA maior temperatura do ano foi %.2fC em %s.\n", temp_max, meses[mes_max]);
+    printf("A menor temperatura do ano foi %.2fC em %s.\n", temp_min, meses[mes_min]);
+
+    return 0;
+}
+ 
+3. Faça um programa que receba o número sorteado por um dado de seis lados jogado vinte vezes. Mostre os números sorteados e a frequência com que apareceram.
+
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+int main(){
+    int dado[20];
+    int freq[6] = {0};
+    srand(time(NULL));
+    for (int i = 0; i <= 20; i++){
+        dado[i] = rand() % 6;
+        if(dado [i] == 1){
+            freq[0]++;
+        }
+        else if(dado[i] == 2){
+            freq[1]++;
+        }
+        else if(dado[i] == 3){
+            freq[2]++;
+        }
+        else if(dado[i] == 4){
+            freq[3]++;
+        }
+        else if(dado[i] == 5){
+            freq[4]++;
+        }
+        else if(dado[i] == 6){
+            freq[5]++;
+        }
+        printf("Numeros sorteados\n");
+        }
+        for(int i = 0; i < 20; i++){
+            printf("%d", dado[i]);
+        }
+        printf("\n");
+        printf("Frequencia dos numeros:\n");
+        for(int i = 0; i < 6; i++){
+            printf("Numero %d: %d vezes\n", i + 1, freq[i]);
+        }
+        return 0;
+}
+
+4. Faça um programa que preencha um vetor com seis elementos numéricos inteiros. Calcule e mostre:
+todos os números pares;
+a quantidade de números pares; 
+todos os números ímpares;
+a quantidade de números ímpares.
+
+#include <stdio.h>
+
+int main() {
+    int vetor[6];
+    int pares[6], impares[6];
+    int qtdPares = 0, qtdImpares = 0;
+    printf("Digite 6 numeros inteiros:\n");
+    for (int i = 0; i < 6; i++) {
+        printf("Numero %d: ", i + 1);
+        scanf("%d", &vetor[i]);
+        if (vetor[i] % 2 == 0) {
+            pares[qtdPares] = vetor[i];
+            qtdPares++;
+        } else {
+            impares[qtdImpares] = vetor[i];
+            qtdImpares++;
+        }
+    }
+    printf("\nNumeros pares:\n");
+    for (int i = 0; i < qtdPares; i++) {
+        printf("%d ", pares[i]);
+    }
+    printf("\nQuantidade de numeros pares: %d\n", qtdPares);
+    printf("\nNumeros impares:\n");
+    for (int i = 0; i < qtdImpares; i++) {
+        printf("%d ", impares[i]);
+    }
+    printf("\nQuantidade de numeros impares: %d\n", qtdImpares);
+
+    return 0;
+}
+
+
+5. Faça um programa que preencha um vetor com os registros acadêmicos (RA) de sete alunos e carregue outro vetor com a média final desses alunos. Calcule e mostre:
+- o RA do aluno com maior média (desconsiderar empates);
+- para cada aluno não aprovado, isto é, com média menor que 7, mostrar quanto esse aluno precisa tirar na prova de exame final para ser aprovado. Considerar que a média para aprovação no exame é 5.
+
+#include <stdio.h>
+int main() {
+    int RA[7];
+    float medias[7];
+    int i, indiceMaiorMedia = 0;
+    float maiorMedia = 0.0;
+    printf("Digite o RA e a media final dos 7 alunos:\n");
+    for (i = 0; i < 7; i++) {
+        printf("Aluno %d - RA: ", i + 1);
+        scanf("%d", &RA[i]);
+        printf("Aluno %d - Media final: ", i + 1);
+        scanf("%f", &medias[i]);
+        if (medias[i] > maiorMedia) {
+            maiorMedia = medias[i];
+            indiceMaiorMedia = i;
+        }
+    }
+    printf("\nO RA do aluno com maior media e: %d\n", RA[indiceMaiorMedia]);
+    printf("\nAlunos nao aprovados e nota necessaria para aprovacao no exame final:\n");
+    for (i = 0; i < 7; i++) {
+        if (medias[i] < 7.0) {
+            float notaNecessaria = (5.0 * 2) - medias[i];
+            printf("Aluno com RA %d precisa tirar %.2f na prova de exame final para ser aprovado.\n", RA[i], notaNecessaria);
+        }
+    }
+
+    return 0;
+}
+
+
+DESAFIO!
+
+Uma pequena loja de artesanato possui apenas um vendedor e comercializa dez tipos de objetos. O vendedor recebe, mensalmente, salário de R$ 545,00, acrescido de 5% do valor total de suas vendas. O valor unitário dos objetos deve ser informado e armazenado em um vetor; a quantidade vendida de cada peça deve ficar em outro vetor, mas na mesma posição. Crie um programa que receba os preços e as quantidades vendidas, armazenando-os em seus respectivos vetores (ambos com tamanho dez). Depois, determine e mostre:
+- um relatório contendo: quantidade vendida, valor unitário e valor total de cada objeto. Ao final, deverão ser mostrados o valor geral das vendas e o valor da comissão que será paga ao vendedor; e
+- O valor do objeto mais vendido e sua posição no vetor (não se preocupe com empates).
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+    float valor[10], totalproduto, totalvenda = 0, comissao;
+    int qtd[10], i, j;
+
+    for( i = 0 ; i < 10 ; i++ ){
+        printf("\nDigite o valor e a quantidade de vendas do produto %i.", i + 1);
+            scanf("%f %i", &valor[i], &qtd[i]);
+    }
+
+    for( i = 0 ; i < 10 ; i++ ){
+        printf("\n\nA quantidade de vendas do produto %2i e de: %i.", (i + 1), qtd[i]);
+        printf("\nO valor unitario do produto %2i e: %.2f.", (i + 1), valor[i]);
+        totalproduto = 0;
+        for( j = 0 ; j < qtd[i] ; j++ ){
+            totalproduto = totalproduto + valor[i];
+        }
+        printf("\nO valor total do produto %2i e: %.2f.", i, totalproduto);
+        totalvenda = totalvenda + totalproduto;
+    }
+
+    printf("\n\nO valor total da venda e: %.2f.", totalvenda);
+
+    comissao = ( 745.00 + ( totalvenda * 0.05 ) );
+
+    printf("\n\nO valor da comissao do vendedor e: %.2f.", comissao);
+
+    for( i = 0 ; i < 10 ; i++ ){
+        for( j = 0 ; j < 10 ; j++ ){
+            if( qtd[i] < qtd[j] ){
+                break;
+            }
+            else if( j == 9 ){
+                printf("\n\nO produto mais vendido foi o produto %2i.", (i + 1));
+            }
+        }
+    }
+
+    return 0;
+}
+
+

@@ -1,0 +1,313 @@
+Atividade 6 - Estruturas de Repetição
+
+1. Implemente um programa que apresente a soma de número ímpares entre 0 e 100.
+
+#include <stdio.h>
+int main (){
+    int soma = 0;
+    for(int i = 1; i < 100; i += 2){
+            soma += i;
+}
+    printf("Soma dos impares: %d\n", soma);
+    return 0;
+}
+
+2. Faça um programa que leia 10 números e mostre-os na ordem lida.
+
+#include <stdio.h>
+int main (){
+    int num;
+    for(int i = 0; i <= 9; i++){
+            scanf("%d", &num); 
+            printf("Valor lido: %d\n", num);
+    }
+    return 0;
+}
+
+3. Faça um programa que verifique e mostre o números entre 1.000 e 2.000 (inclusive) que são divisíveis por 7.
+
+#include <stdio.h>
+int main(){
+int inicio = 1000;
+int fim = 2000;
+for (int i = inicio; i <= fim; i++){
+        if (i % 7 == 0){
+        printf("%d e divisivel por 7\n", i);
+    }
+ }
+return 0;
+}
+
+4. Faça um programa que receba dez idades, pesos e alturas e calcule e mostre:
+a) a média das idades das dez pessoas;
+b) a quantidade de pessoas com peso superior a 90 quilos e altura inferior a 1,50;
+c) a porcentagem de pessoas com idade entre 10 e 30 anos entre as pessoas que medem mais de 1,90.
+
+#include <stdio.h>
+int main(){
+int idd = 0, sidd = 0, b = 0, c = 0, mun = 0;
+float midd = 0, peso = 0, alt = 0, pc = 0;
+for (int i = 1; i <= 10; i++){
+        printf("Insira a idade, peso e altura\n");
+        scanf("%d %f %f", &idd, &peso, &alt);
+        sidd = (sidd + idd);
+        midd = (sidd + idd)/i;
+        if (peso > 90 && alt < 1.50){
+            b = b + 1;
+        }
+        if (alt > 1.90){
+            mun = mun + 1;
+        }
+        if (idd >= 10 && idd <= 30 && alt > 1.90){
+            c = c + 1;
+            pc = (mun / c) * 100;
+        }
+}
+printf("Idade media: %.lf\n", midd);
+printf("Pessoas menores que 1.50 e mais que 90kg: %d\n", b);
+printf("Porcentagem de pessoas entre 10 e 30 anos maiores que 1.90: %.2f Porcento\n", pc);
+
+return 0;
+}
+
+5. Faça um programa que receba um número, calcule e mostre a tabuada desse número. 
+
+#include <stdio.h>
+int main(){
+    int i = 1;
+    int num;
+    scanf("%d", &num);
+    while (i <= 10){
+        printf("%d * %d = %d\n",num, i, num*i);
+        i++;
+    }
+    return 0;
+}
+
+6. Faça um programa que receba dez números, calcule e mostre a soma dos números pares e o produto dos números ímpares.
+
+#include <stdio.h>
+int main(){
+    int produto;
+    for (int i = 0; i <= 100; i += 2){
+        printf("i sendo par: %d\n", i);
+        produto = i * 1;
+        printf("Soma dos numeros pares: %d\n", produto);
+    }
+    for (int i = 1; i <= 100; i += 2){
+        printf("i sendo impar: %d\n", i);
+        produto = i * i;
+        printf("Soma dos numeros impares: %d\n", produto);
+    }
+    return 0;
+}
+
+7. Cada espectador de um cinema respondeu a um questionário no qual constava sua idade e sua opinião em relação ao filme: ótimo — 3; bom — 2; regular — 1. Faça um programa que receba a idade e a opinião de quinze espectadores, calcule e mostre:
+a) a média das idades das pessoas que responderam ótimo;
+b) a quantidade de pessoas que responderam regular; 
+c) a percentagem de pessoas que responderam bom, entre todos os espectadores analisados.
+
+#include <stdio.h>
+
+int main(){
+
+    int nota=0, idd=0, sidd=0, o=0, r=0, b=0;
+    float midd=0, pb=0;
+
+    for (int i=1; i<=15; i++){
+        printf ("Insira a idade e nota do filme\n");
+        scanf ("%d %d", &idd, &nota);
+
+
+        if (nota == 3){
+            o = o+1;
+            sidd = (sidd + idd);
+        }
+        if (nota == 1){
+            r = r+1;
+        }
+        if (nota == 2){
+            b = b+1;
+        }
+    }
+
+    midd = sidd/o;
+    pb = (b/15.0)*100;
+
+    printf ("Idade media dos espectadores que avaliaram como otimo: %.1f\n", midd);
+    printf ("Espectadores que avaliaram como regular: %d\n", r);
+    printf ("Porcentagem de espectadores que avaliaram como bom: %.2f%%", pb);
+
+return 0;
+}
+
+8. Faça um programa que receba a quantidade de idades que serão inseridas e as idades, calcule e mostre a média das idades digitadas. Finalize digitando idade igual a zero.
+
+#include <stdio.h>
+int main(){
+
+    int ni=0, idd=0, sidd=0;
+    float midd=0;
+
+    printf ("Insira  o numero de idades\n");
+    scanf ("%d", &ni);
+
+    for (int i=1; i<=ni; i++){
+        printf ("Insira a idade\n");
+        scanf ("%d", &idd);
+
+
+        sidd = (sidd + idd);
+
+    }
+
+    midd = sidd*1.0/ni*1.0;
+
+    printf ("Idade media : %.1f\n", midd);
+
+    idd=0;
+
+    return 0;
+}
+
+9. Faça um programa que recebe várias idades, calcule e mostre a média das idades digitadas. Finalize o programa quando for digitada a idade zero.
+
+#include <stdio.h>
+int main(){
+
+    int idd=0, sidd=0, o=0;
+    float midd=0;
+
+    do{
+        printf ("Insira a idade\n");
+        scanf ("%d", &idd);
+
+
+    if (idd>0){
+        o= o+1;
+
+        sidd = (sidd + idd);
+        midd = sidd*1.0/o*1.0;
+
+        printf ("Idade media: %.1f\n", midd);}
+
+    }while(idd>0);
+
+    return 0;
+}
+
+10. Faça um programa que apresente o menu de opções a seguir:
+
+Menu de opções:
+
+1. Média aritmética;
+2. Média ponderada;
+3. Sair.
+
+Digite a opção desejada:
+Na opção 1: receber duas notas, calcular e mostrar a média aritmética.
+Na opção 2: receber três notas e seus respectivos pesos, calcular e mostrar a média ponderada;
+Na opção 3: sair do programa;
+Verifique a possibilidade de opção inválida. Nesse caso, o programa deverá mostrar uma mensagem.
+
+#include <stdio.h>
+int main(){
+    int i;
+    float nota1, nota2, nota3, media = 0, peso, pesogeral = 0, notapond = 0;
+    do{
+        printf("1 - Media Aritmetica\n2 - Media ponderada\n3 - Sair\n");
+        scanf("%d", &i);
+        if (i == 1){
+            printf("\nSelecionado: Media Aritmetica\n\nDigite as duas notas: ");
+            scanf("%f %f", &nota1, &nota2);
+            media = nota1 + nota2;
+            media = media/2;
+            printf("Resultado: %.2f\n\n", media);
+            media = 0;
+        }else if(i == 2){
+            for(int a = 1; a <= 3; a++){
+            printf("\nSelecionado: Media Ponderada\n\nDigite uma nota: ");
+            scanf("%f", &nota3);
+            printf("Digite o peso da nota: ");
+            scanf("%f", &peso);
+            notapond = notapond + (nota3 * peso);
+            pesogeral = pesogeral + peso;
+                }
+            media = notapond/pesogeral;
+            printf("Resultado: %.2f\n\n", media);
+            media = 0;
+        }else if (i > 3){
+            printf("\nOpcao invalida\n\n");
+            }
+    }while (i < 3 || i > 3);
+    printf("\nSaindo\n");
+    return 0;
+    }
+
+11. Em uma eleição presidencial existem quatro candidatos. Os votos são informados por meio de código. Os códigos utilizados são:
+
+- 1, 2, 3, ou 4: votos para os respectivos candidatos
+- 4: voto nulo
+- 6: voto em branco
+Faça um programa que calcule e mostre:
+o total de votos para cada candidato;
+o total de votos nulos;
+o total de votos em branco;
+a porcentagem de votos nulos sobre o total de votos; e
+a porcentagem de votos em branco sobre o total de votos.
+Para finalizar o conjunto de votos, tem-se o valor zero e, para códigos inválidos, o programa deverá mostrar uma mensagem.
+
+#include <stdio.h>
+int main (){
+    int voto = 0, quant1 = 0, quant2 = 0, quant3 = 0, quant4 = 0, quant0 = 0, quantB = 0, porcent0 = 0, porcentB = 0, total = 0;
+    do{
+        printf("Digite o numero do candidato 1\n\n");
+        scanf("%d", &voto);
+        if (voto == 1){
+            quant1++;
+            total++;
+            printf("Voto computado para o candidato 1\n\n");
+        }else if (voto == 2){
+            quant2++;
+            total++;
+            printf("Voto computado para o candidato 2\n\n");
+        }else if (voto == 3){
+            quant3++;
+            total++;
+            printf("Voto computado para o candidato 3\n\n");
+        }else if (voto == 4){
+            quant4++;
+            total++;
+            printf("Voto computado para o candidato 4\n\n");
+        }else if (voto == 5){
+            quant0++;
+            total++;
+            printf("Voto em nulo registrado\n\n");
+        }else if (voto == 6){
+            quantB++;
+            total++;
+            printf("Voto em branco registrado\n\n ");
+        }else if (voto == 0){
+            printf("Saindo\n");
+        }else{
+            printf("Voto invalido\n\n");
+            }
+    }while (voto > 0 || voto < 0);
+    porcent0 = quant0 * 100;
+    porcentB = quantB * 100;
+    porcent0 = porcent0 / total;
+    porcentB = porcentB / total;
+    printf("Candidato 1: %d votos\nCandidato 2: %d votos\nCandidatos 3: %d votos\nCandidato 4: %d votos\n", quant1, quant2, quant3, quant4);
+    printf("Votos nulos: %d votos\nVotos em branco: %d votos\n", quant0, quantB);
+    printf("Porcentagem de votos nulos: %d%%\n", porcent0);
+    printf("Porcentagem de votos em branco: %d%%\n", porcentB);
+    return 0;
+    }
+
+
+
+
+
+
+
+

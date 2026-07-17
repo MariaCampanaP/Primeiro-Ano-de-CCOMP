@@ -1,0 +1,185 @@
+Atividade 8 - Cadeia de Caracteres
+
+1. Implemente um programa que leia o nome de 5 pessoas e mostre os nomes armazenados. Utilize vetores.
+
+#include <stdio.h>
+int main(){
+    char nomes[5][50];
+    for(int i = 0; i < 5; i++){
+        printf("Digite o nome da pessoa %d:", i + 1);
+        scanf("%49s", nomes[i]);
+    }
+    printf("\nOs nomes armazenados sao:\n");
+    for(int i = 0; i < 5; i++){
+        printf("%s\n", nomes[i]);
+    }
+return 0;
+}
+
+2. Implemente um programa que receba o nome de uma música e um caractere qualquer. Percorra esta cadeia que armazenou o nome da música a procura do caractere informado e retorne o seu índice ou a mensagem: caractere não encontrado. 
+Exemplo:
+Entradas
+Nome da música: Como uma onda no mar
+Caractere: a
+
+Saídas
+Ocorrência de caractere na posição 7
+Ocorrência de caractere na posição 12
+Ocorrência de caractere na posição 18
+
+Entradas
+Nome da música: Amor I love you
+Caractere: c
+
+Saídas
+Caractere não encontrado.
+
+#include <stdio.h>
+#include <string.h>
+int main(){
+    char musica[100];
+    char caractere;
+    char encontrado = 0;
+    printf("Digite o nome da musica:");
+    fgets(musica, 100, stdin);
+    musica[strcspn(musica, "\n")] = '\0';
+    printf("Digite o caractere: ");
+    scanf("%c", &caractere);
+    for(int i = 0; i < strlen(musica); i++){
+        if(musica[i] == caractere){
+            printf("Ocorrencia de caractere na posicao %d\n", i);
+            encontrado = 1;
+        }
+    }
+    if(!encontrado){
+        printf("Caractere nao encontrado.\n");
+    }
+return 0;
+}
+
+3. Faça um programa que receba uma frase, calcule e mostre a quantidade de vogais da frase digitada. O programa deverá contar vogais maiúsculas e minúsculas.
+Exemplo:
+Entrada
+Frase: Eu moro em Apucarana.
+
+Saída
+Quantidade de vogais: 10.
+
+#include <stdio.h>
+#include <ctype.h>
+int main(){
+    char frase[1000];
+    int quantidadeVogais = 0;
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);
+    for(int i = 0; frase[i] !=  '\0'; i++){
+            char ch = tolower(frase[i]);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+                quantidadeVogais++;
+            }
+        }
+        printf("Quantidade de vogais: %d\n", quantidadeVogais);
+
+return 0;
+}
+
+4. Faça um programa para criptografar uma frase dada pelo usuário (a criptografia troca as vogais da frase por *). Mostre a mensagem criptografada na tela.
+Exemplo:
+Frase: EU ESTOU NA ESCOLA
+Saída: ** * ST** N* *SC*L*
+
+#include <stdio.h>
+#include <ctype.h>
+int main(){
+    char frase[1000];
+    int quantidadeVogais = 0;
+    printf("Digite uma frase: ");
+    fgets(frase, sizeof(frase), stdin);
+    for(int i = 0; frase[i] !=  '\0'; i++){
+            char ch = tolower(frase[i]);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+                quantidadeVogais++;
+            }
+        }
+        printf("Quantidade de vogais: %d\n", quantidadeVogais);
+
+return 0;
+}
+
+5. Faça um programa que receba uma palavra e verifique se ela constitui um palíndromo, ou seja, se a palavra escrita do fim para o começo fica igual à palavra escrita do começo para o fim.
+Exemplos:
+ARARA
+ANA
+MIRIM
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(){
+    char palavra[1000];
+    int ehPalindromo = 1;
+    printf("Digite uma palavra:");
+    scanf("%s", palavra);
+    int tamanho = strlen(palavra);
+    for(int i = 0; i < tamanho / 2; i++){
+        if(tolower(palavra[i]) != tolower(palavra[tamanho - 1 - i])){
+            ehPalindromo = 0;
+            break;
+        }
+    }
+    if (ehPalindromo){
+        printf("A palavra '%s', e um palindromo.\n", palavra);
+    }else{
+        printf("A palavra '%s', nao e um palindromo.\n", palavra);
+    }
+return 0;
+}
+
+
+DESAFIO.
+Faça um programa que receba o nome completo de uma pessoa e mostre os nomes intermediários entre o primeiro nome e o último sobrenome abreviados.
+Exemplo:
+Nome: Maria Silva Costa
+Saída: Maria S. Costa
+
+Nome: João Carlos Gomes Marques
+Saída: João C. G. Marques
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+int main(){
+    char nome[1000], resultado[1000];
+    int inicioPalavra = 0, fimPalavra = 0, resultadoIndex = 0;
+    printf("Digite o nome completo: ");
+    fgets(nome, sizeof(nome),stdin);
+    nome[strcspn(nome, "\n")] = 0;
+    int tamanho = strlen(nome);
+    while(nome[fimPalavra] != ' ' && nome[fimPalavra] != '\0'){
+        fimPalavra++;
+    }
+    strncpy(resultado, nome, fimPalavra);
+    resultadoIndex = fimPalavra;
+    resultado[resultadoIndex++] = ' ';
+    inicioPalavra = fimPalavra + 1;
+    while(inicioPalavra < tamanho){
+        fimPalavra = inicioPalavra;
+        while (nome[fimPalavra] != ' ' && nome[fimPalavra] != '\0'){
+            fimPalavra++;
+        }
+        if (nome[fimPalavra] == ' '){
+                resultado[resultadoIndex++] = toupper(nome[inicioPalavra]);
+                resultado[resultadoIndex++] = '.';
+                resultado[resultadoIndex++] = ' ';
+        }else{
+            strncpy(&resultado[resultadoIndex], &nome[inicioPalavra], fimPalavra - inicioPalavra);
+            resultadoIndex += fimPalavra - inicioPalavra;
+            break;
+        }
+        inicioPalavra = fimPalavra + 1;
+    }
+    resultado[resultadoIndex] = '\0';
+    printf("Nome abreviado: %s\n", resultado);
+    return 0;
+}
+
